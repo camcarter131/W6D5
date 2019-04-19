@@ -1,0 +1,19 @@
+/* PHASE 12: Modal */
+
+.modal {
+  position: relative;
+}
+
+.modal-screen {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 2;
+  background-color: 0 0 0 0.8;
+}
+
+.modal-form > input, submit {
+  position: absolute;
+}
