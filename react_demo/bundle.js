@@ -90,11 +90,14 @@
 /*!****************************!*\
   !*** ./frontend/clock.jsx ***!
   \****************************/
-/*! exports provided: default */
+/*! exports provided: Clock */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Clock", function() { return Clock; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -113,6 +116,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+
+var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
+var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var Clock =
 /*#__PURE__*/
 function (_React$Component) {
@@ -149,16 +155,44 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "calculateTime",
+    value: function calculateTime(_ref) {
+      var date = _ref.date;
+      var mins = date.getMinutes();
+      var hours = date.getHours();
+      var secs = date.getSeconds();
+      hours %= 12;
+      var zeroHours = hours < 10 ? 0 : "";
+      var zeroMins = mins < 10 ? 0 : "";
+      var zeroSecs = secs < 10 ? 0 : "";
+      return "".concat(zeroHours).concat(hours, ":").concat(zeroMins).concat(mins, ":").concat(zeroSecs).concat(secs);
+    }
+  }, {
+    key: "calculateDate",
+    value: function calculateDate(_ref2) {
+      var date = _ref2.date;
+      var dayOfWeek = DAYS[date.getDay()];
+      var year = date.getFullYear();
+      var month = MONTHS[date.getMonth()];
+      var dayOfMonth = date.getDate();
+      return "".concat(dayOfWeek, " ").concat(month, " ").concat(dayOfMonth, " ").concat(year);
+    }
+  }, {
     key: "render",
     value: function render() {
-      React.createElement("h3", null, this.state.date);
+      // debugger
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "clock"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "time"
+      }, this.calculateTime(this.state)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "date"
+      }, this.calculateDate(this.state)));
     }
   }]);
 
   return Clock;
-}(React.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (Clock);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /***/ }),
 
@@ -166,17 +200,22 @@ function (_React$Component) {
 /*!***************************!*\
   !*** ./frontend/root.jsx ***!
   \***************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _clock__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./clock */ "./frontend/clock.jsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _clock__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./clock */ "./frontend/clock.jsx");
+
 
 
 var Root = function Root(props) {
-  return true;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_clock__WEBPACK_IMPORTED_MODULE_1__["Clock"], null);
 };
+
+/* harmony default export */ __webpack_exports__["default"] = (Root);
 
 /***/ }),
 
@@ -194,12 +233,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _root__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./root */ "./frontend/root.jsx");
+/* harmony import */ var _clock__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./clock */ "./frontend/clock.jsx");
+
 
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  var root = document.getElementById("root");
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_root__WEBPACK_IMPORTED_MODULE_2__["default"], null), root);
+  var main = document.getElementById("main");
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_root__WEBPACK_IMPORTED_MODULE_2__["default"], null), main);
 });
 
 /***/ }),

@@ -1,7 +1,10 @@
-import Clock from "./clock";
+import React from 'react';
+import { Clock } from "./clock";
 
 const Root = (props) => {
   return (
-    true
+    <Clock />
   );
-};
+}; 
+
+export default Root;
